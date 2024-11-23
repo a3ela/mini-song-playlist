@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, miniSerializeError } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
 import SongsReducer from "./features/songSlice";
 import songSaga from "./saga/songSaga";
@@ -12,6 +12,6 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware),
 });
+sagaMiddleware.run(songSaga);
 
 export default store;
-sagaMiddleware.run(songSaga);
