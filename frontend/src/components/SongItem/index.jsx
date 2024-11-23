@@ -11,11 +11,12 @@ import {
 import { CiEdit } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
 
-const SongItem = ({ song }) => {
-  const { image, name, artist, year } = song;
+const SongItem = ({ song, onEdit, onDelete }) => {
+  const { id, image, name, artist, year } = song;
+
   return (
     <Wrapper>
-      <Image src={image} />
+      <Image src={`http://localhost:3001/${image}`} />
       <Content>
         <div>
           <h4>{name}</h4>
@@ -24,13 +25,13 @@ const SongItem = ({ song }) => {
         <h4>{year}</h4>
       </Content>
       <ButtonContainer>
-        <Button>
+        <Button onClick={onEdit}>
           <span>Edit</span>
           <span>
             <CiEdit />
           </span>
         </Button>
-        <Button color={"red"}>
+        <Button onClick={onDelete} color={"red"}>
           <span>Delete</span>
           <span>
             <MdDeleteOutline />
