@@ -13,7 +13,6 @@ import {
   deleteSong,
   deleteSongRejected,
   deleteSongResolved,
-  clearAll,
 } from "../features/songSlice";
 
 import { getAll, create, update, remove } from "../services/songService";
@@ -27,6 +26,10 @@ function* fetchSongs() {
   }
 }
 
+function* watchFetchSongs() {
+  yield takeEvery(getSongs.type, fetchSongs);
+}
+
 function* addSong(action) {
   try {
     const song = yield call(create, action.payload);
@@ -36,30 +39,43 @@ function* addSong(action) {
   }
 }
 
+function* watchAddSong() {
+  yield takeEvery(createSong.type, addSong);
+}
+
 function* changeSong(action) {
   try {
-    const song = yield call(update, action.payload.id, action.payload.song);
-    yield put(updateSongResolved(song));
+    const id = action.payload.id;
+    const song = action.payload.sendFormData;
+    const updatedSong = yield call(update, id, song);
+    yield put(updateSongResolved(updatedSong));
   } catch (error) {
     yield put(updateSongRejected(error.message));
   }
 }
 
+function* watchChangeSong() {
+  yield takeEvery(updateSong.type, changeSong);
+}
+
 function* removeSong(action) {
   try {
-    yield call(remove, action.payload.id);
-    yield put(deleteSongResolved(action.payload.id));
+    yield call(remove, action.payload);
+    yield put(deleteSongResolved(action.payload));
   } catch (error) {
     yield put(deleteSongRejected(error.message));
   }
 }
 
+function* watchRemoveSong() {
+  yield takeEvery(deleteSong.type, removeSong);
+}
+
 export default function* songSaga() {
   yield all([
-    takeEvery(getSongs.type, fetchSongs),
-    takeEvery(createSong.type, addSong),
-    takeEvery(updateSong.type, changeSong),
-    takeEvery(deleteSong.type, removeSong),
-    takeEvery(clearAll.type, fetchSongs),
+    watchFetchSongs(),
+    watchAddSong(),
+    watchChangeSong(),
+    watchRemoveSong(),
   ]);
 }
