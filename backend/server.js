@@ -1,10 +1,12 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const musicRouter = require("./controllers/musicController");
 const app = express();
 
 // middleware
 app.use(express.json());
+app.use(cors());
 app.use("/uploads", express.static("uploads"));
 
 // mongoose connection to mongodb database

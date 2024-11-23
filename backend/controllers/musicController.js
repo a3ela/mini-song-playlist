@@ -47,15 +47,27 @@ musicRouter.post("/", upload.single("image"), async (request, response) => {
 
 musicRouter.put("/:id", upload.single("image"), async (request, response) => {
   const { name, artist, year } = request.body;
+
   try {
     const { id } = request.params;
     if (!name || !artist || !year) {
       return response.status(400).json({ error: "missing required fields" });
     }
-    const song = await Music.findByIdAndUpdate(id, request.body, { new: true });
-    if (!song) return response.status(404).json({ error: "song not found" });
+
+    const updatedSong = {
+      name,
+      artist,
+      year,
+    };
+    if (request.file) {
+      updatedSong.image = request.file.path;
+    }
+
+    const song = await Music.findByIdAndUpdate(id, updatedSong, { new: true });
     response.status(200).json(song);
-  } catch {
+
+    if (!song) return response.status(404).json({ error: "song not found" });
+  } catch (error) {
     response.status(500).json({ error: "Internal server error" });
   }
 });
