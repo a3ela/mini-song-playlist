@@ -7,11 +7,10 @@ import source from "../../source.js";
 import SongItem from "../SongItem";
 import Modal from "../Modal";
 import DeleteForm from "../Forms/DeleteSong.jsx";
-import CreateForm from "../Forms/CreateSong.jsx";
 import UpdateForm from "../Forms/UpdateSong.jsx";
 
 // redux
-import { getSongs, getSongsResolved } from "../../features/songSlice";
+import { getSongs } from "../../features/songSlice";
 // styles
 import { Wrapper, Header, Footer } from "./SongContainer.style";
 
@@ -25,13 +24,6 @@ const SongContainer = () => {
   const handleEdit = (id) => {
     setModalContent(
       <UpdateForm id={id} onClose={() => setIsModalOpen(false)} />
-    );
-    setIsModalOpen(true);
-  };
-
-  const handleCreate = (id) => {
-    setModalContent(
-      <CreateForm id={id} onClose={() => setIsModalOpen(false)} />
     );
     setIsModalOpen(true);
   };

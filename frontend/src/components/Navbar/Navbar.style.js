@@ -18,13 +18,6 @@ export const Content = styled.div`
   display: flex;
   align-items: center;
 
-  form {
-    margin-right: 2rem;
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-  }
-
   input {
     background-color: transparent;
     border: none;
@@ -36,10 +29,16 @@ export const Content = styled.div`
     -moz-selection: red;
   }
 
+  input::placeholder {
+    color: var(--clr-white);
+  }
+
   button {
     background: transparent;
     border: none;
+    margin-right: 2rem;
   }
+
   svg {
     font-size: 1.5rem;
     color: var(--clr-white);
