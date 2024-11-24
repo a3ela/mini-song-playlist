@@ -328,7 +328,7 @@ Error generating stack: `+i.message+`
       transform: rotate(360deg);
     }
   }
-`,Ew=()=>{const e=ho(),{songs:t,isLoading:n,searchResults:r,searchTerm:o}=Ra(m=>m.songs),[i,l]=B.useState(!1),[s,u]=B.useState(null),a=m=>{u(R.jsx(mw,{id:m,onClose:()=>l(!1)})),l(!0)},c=m=>{u(R.jsx(hw,{id:m,onClose:()=>l(!1)})),l(!0)};B.useEffect(()=>{e(Qh())},[t]);const f=o?r:t;return f==[]?R.jsx("h1",{children:"No Results found"}):R.jsxs(yw,{children:[i&&R.jsx(Ta,{children:s}),n?R.jsxs(R.Fragment,{children:[R.jsx(gw,{children:R.jsxs("h3",{children:["Songs Total: ",t.length]})}),R.jsx("div",{children:f.map(m=>R.jsx(v1,{song:m,onEdit:()=>a(m._id),onDelete:()=>c(m._id)},m._id))})]}):R.jsx(vw,{children:R.jsx(Sw,{})}),R.jsxs(ww,{children:[R.jsx("hr",{}),R.jsx("p",{children:"This is a Mini Song list App"})]})]})},xw=le.div`
+`,Ew=()=>{const e=ho(),{songs:t,isLoading:n,searchResults:r,searchTerm:o}=Ra(m=>m.songs),[i,l]=B.useState(!1),[s,u]=B.useState(null),a=m=>{u(R.jsx(mw,{id:m,onClose:()=>l(!1)})),l(!0)},c=m=>{u(R.jsx(hw,{id:m,onClose:()=>l(!1)})),l(!0)};B.useEffect(()=>{e(Qh())},[t]);const f=o?r:t;return f==[]?R.jsx("h1",{children:"No Results found"}):R.jsxs(yw,{children:[i&&R.jsx(Ta,{children:s}),n?R.jsxs(R.Fragment,{children:[R.jsx(gw,{children:R.jsxs("h3",{children:["Songs Total: ",f.length]})}),R.jsx("div",{children:f.map(m=>R.jsx(v1,{song:m,onEdit:()=>a(m._id),onDelete:()=>c(m._id)},m._id))})]}):R.jsx(vw,{children:R.jsx(Sw,{})}),R.jsxs(ww,{children:[R.jsx("hr",{}),R.jsx("p",{children:"This is a Mini Song list App"})]})]})},xw=le.div`
   background: var(--clr-primary);
   padding: 1.25rem 2rem;
   display: flex;
