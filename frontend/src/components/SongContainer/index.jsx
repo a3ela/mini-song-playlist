@@ -52,7 +52,7 @@ const SongContainer = () => {
       {isLoading ? (
         <>
           <Header>
-            <h3>Songs Total: {songs.length}</h3>
+            <h3>Songs Total: {songsFiltered.length}</h3>
           </Header>
           <div>
             {songsFiltered.map((song) => (
