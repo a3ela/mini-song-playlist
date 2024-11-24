@@ -1,16 +1,17 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Wrapper, Content } from "./Navbar.style";
-
+import { search } from "../../features/songSlice";
 // icons
 import { MdPostAdd } from "react-icons/md";
 import { IoSearchSharp } from "react-icons/io5";
+// components
 import CreateSong from "../Forms/CreateSong";
-import { useDispatch } from "react-redux";
 import Modal from "../Modal";
-import { search } from "../../features/songSlice";
 
 const Navbar = () => {
   const dispatch = useDispatch();
+  const { searchTerm } = useSelector((state) => state.songs);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [query, setQuery] = useState("");
 
@@ -29,11 +30,11 @@ const Navbar = () => {
       <Content>
         <input
           type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          value={searchTerm}
+          onChange={handleSeach}
           placeholder="Search songs..."
         />
-        <button type="submit" onClick={handleSeach}>
+        <button type="button" onClick={handleSeach}>
           <IoSearchSharp />
         </button>
 

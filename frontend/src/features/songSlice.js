@@ -66,9 +66,12 @@ export const songSlice = createSlice({
       Object.assign(state, initialState);
     },
     search: (state, action) => {
+      console.log(action.payload);
       state.searchTerm = action.payload;
       state.searchResults = state.songs.filter(
-        (song) => song.name === action.payload
+        (song) =>
+          song.name.toLowerCase().includes(action.payload.toLowerCase()) ||
+          song.artist.toLowerCase().includes(action.payload.toLowerCase())
       );
     },
   },
