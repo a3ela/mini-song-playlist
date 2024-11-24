@@ -10,7 +10,7 @@ import UpdateForm from "../Forms/UpdateSong.jsx";
 // redux
 import { getSongs } from "../../features/songSlice";
 // styles
-import { Wrapper, Header, Footer } from "./SongContainer.style";
+import { Wrapper, Header, Footer, Center } from "./SongContainer.style";
 import { Spinner } from "../Spinner/Spinner.style.js";
 
 const SongContainer = () => {
@@ -66,7 +66,9 @@ const SongContainer = () => {
           </div>
         </>
       ) : (
-        <Spinner />
+        <Center>
+          <Spinner />
+        </Center>
       )}
       <Footer>
         <hr />

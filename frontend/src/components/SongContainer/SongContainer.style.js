@@ -15,7 +15,13 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const Header = styled.header``;
+export const Header = styled.div`
+  margin-bottom: 2rem;
+`;
+export const Center = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 
 export const Footer = styled.div`
   margin-top: 3rem;

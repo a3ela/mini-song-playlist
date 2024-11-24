@@ -16,7 +16,7 @@ const SongItem = ({ song, onEdit, onDelete }) => {
 
   return (
     <Wrapper>
-      <Image src={`http://localhost:3001/${image}`} />
+      <Image src={`http://localhost:3000/${image}`} />
       <Content>
         <div>
           <h4>{name}</h4>
