@@ -7,7 +7,7 @@ import { IoSearchSharp } from "react-icons/io5";
 import CreateSong from "../Forms/CreateSong";
 import { useDispatch } from "react-redux";
 import Modal from "../Modal";
-import { searchTerm } from "../../features/songSlice";
+import { search } from "../../features/songSlice";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -15,7 +15,8 @@ const Navbar = () => {
   const [query, setQuery] = useState("");
 
   const handleSeach = (e) => {
-    dispatch(searchTerm(query));
+    dispatch(search(e.target.value));
+    setQuery("");
   };
   return (
     <Wrapper>

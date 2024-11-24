@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAll } from "../../services/songService.js";
 
 // conponents
-import source from "../../source.js";
 import SongItem from "../SongItem";
 import Modal from "../Modal";
 import DeleteForm from "../Forms/DeleteSong.jsx";
@@ -13,11 +11,14 @@ import UpdateForm from "../Forms/UpdateSong.jsx";
 import { getSongs } from "../../features/songSlice";
 // styles
 import { Wrapper, Header, Footer } from "./SongContainer.style";
+import { Spinner } from "../Spinner/Spinner.style.js";
 
 const SongContainer = () => {
   const dispatch = useDispatch();
 
-  const { songs, isLoading, error } = useSelector((state) => state.songs);
+  const { songs, isLoading, searchResults, searchTerm } = useSelector(
+    (state) => state.songs
+  );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState(null);
 
@@ -39,22 +40,34 @@ const SongContainer = () => {
     dispatch(getSongs());
   }, [songs]);
 
+  const songsFiltered = searchTerm ? searchResults : songs;
+
+  if (songsFiltered == []) {
+    return <h1>No Results found</h1>;
+  }
   return (
     <Wrapper>
       {isModalOpen && <Modal>{modalContent}</Modal>}
-      <Header>
-        <h3>Songs Total: {songs.length}</h3>
-      </Header>
-      <div>
-        {songs.map((song) => (
-          <SongItem
-            key={song._id}
-            song={song}
-            onEdit={() => handleEdit(song._id)}
-            onDelete={() => handleDelete(song._id)}
-          />
-        ))}
-      </div>
+
+      {isLoading ? (
+        <>
+          <Header>
+            <h3>Songs Total: {songs.length}</h3>
+          </Header>
+          <div>
+            {songsFiltered.map((song) => (
+              <SongItem
+                key={song._id}
+                song={song}
+                onEdit={() => handleEdit(song._id)}
+                onDelete={() => handleDelete(song._id)}
+              />
+            ))}
+          </div>
+        </>
+      ) : (
+        <Spinner />
+      )}
       <Footer>
         <hr />
         <p>This is a Mini Song list App</p>

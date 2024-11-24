@@ -2,8 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   songs: [],
+  searchResults: [],
   isLoading: false,
   error: null,
+  searchTerm: "",
 };
 
 export const songSlice = createSlice({
@@ -63,6 +65,12 @@ export const songSlice = createSlice({
     clearAll: (state) => {
       Object.assign(state, initialState);
     },
+    search: (state, action) => {
+      state.searchTerm = action.payload;
+      state.searchResults = state.songs.filter(
+        (song) => song.name === action.payload
+      );
+    },
   },
 });
 
@@ -81,5 +89,5 @@ export const {
   deleteSong,
   deleteSongRejected,
   deleteSongResolved,
-  clearAll,
+  search,
 } = songSlice.actions;
