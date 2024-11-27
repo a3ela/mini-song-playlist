@@ -59,6 +59,9 @@ The songSlice contains the following actions:
 
 **searchTerm**: Filter songs based on a search term.
 
+## Live Demo
+https://mini-song-playlist.onrender.com/
+
 # Contributing
 Contributions are welcome! Please create a new branch for each feature or bugfix. Open a pull request to have your changes reviewed and merged.
 
